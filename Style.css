@@ -1,0 +1,189 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+
+  width: 100%;
+  min-height: 100%;
+
+  background: #000;
+}
+
+body {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  min-height: 100svh;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   9:16 FRAME
+   ========================================================= */
+
+#stage {
+  position: relative;
+
+  width: min(
+    100vw,
+    56.25svh
+  );
+
+  aspect-ratio: 9 / 16;
+
+  overflow: hidden;
+
+  background: #050607;
+}
+
+
+#stage canvas {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+}
+
+
+/* =========================================================
+   START
+   ========================================================= */
+
+#start {
+  position: absolute;
+
+  z-index: 100;
+
+  left: 50%;
+  top: 50%;
+
+  transform:
+    translate(-50%, -50%);
+
+  padding:
+    15px 18px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.35);
+
+  background:
+    rgba(5,6,7,.82);
+
+  color: white;
+
+  font-size: 13px;
+
+  letter-spacing: .16em;
+
+  border-radius: 3px;
+}
+
+
+#hint {
+  position: absolute;
+
+  z-index: 90;
+
+  bottom: 16px;
+  left: 50%;
+
+  transform:
+    translateX(-50%);
+
+  color:
+    rgba(255,255,255,.38);
+
+  font-family:
+    Arial,
+    sans-serif;
+
+  font-size: 9px;
+
+  letter-spacing: .18em;
+
+  white-space: nowrap;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   FILM GRAIN
+
+   This is CSS only.
+   The actual scene underneath is real 3D.
+   ========================================================= */
+
+#stage::after {
+  content: "";
+
+  position: absolute;
+
+  inset: -20%;
+
+  z-index: 80;
+
+  pointer-events: none;
+
+  opacity: .055;
+
+  background:
+
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,.4) 0px,
+      transparent 1px,
+      transparent 3px
+    ),
+
+    repeating-linear-gradient(
+      90deg,
+      rgba(0,0,0,.5) 0px,
+      transparent 1px,
+      transparent 4px
+    );
+
+  mix-blend-mode: overlay;
+
+  animation:
+    grainMove .18s steps(2)
+    infinite;
+}
+
+
+@keyframes grainMove {
+
+  0% {
+    transform:
+      translate(0,0);
+  }
+
+  25% {
+    transform:
+      translate(-2%,1%);
+  }
+
+  50% {
+    transform:
+      translate(1%,-1%);
+  }
+
+  75% {
+    transform:
+      translate(2%,2%);
+  }
+
+  100% {
+    transform:
+      translate(-1%,-2%);
+  }
+
+}
